@@ -39,6 +39,8 @@ class User(AbstractBaseUser,PermissionsMixin):
 class Category(models.Model):
     name = models.CharField(max_length=200)
     image = models.ImageField(upload_to='category',null=True,blank=True)
+    def __str__(self):
+        return self.name
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
@@ -50,3 +52,5 @@ class Product(models.Model):
     is_out_of_stock = models.BooleanField(default=False)
     qr_code = models.ImageField(upload_to='product_qrcodes', blank=True, null=True)
     image = models.ImageField(upload_to='products', blank=True, null=True)
+    def __str__(self):
+        return f"{self.category.name} {self.name}"
